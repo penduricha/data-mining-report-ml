@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <title>Dự đoán loại thuốc</title>
+    <style>
+        body { font-family: Arial, sans-serif; margin: 40px; background-color: #f4f4f9; }
+        .container { max-width: 500px; background: white; padding: 20px; border-radius: 8px; box-shadow: 0 2px 10px rgba(0,0,0,0.1); }
+        .form-group { margin-bottom: 15px; }
+        label { display: block; margin-bottom: 5px; font-weight: bold; }
+        select, input { width: 100%; padding: 8px; border: 1px solid #ddd; border-radius: 4px; }
+        button { background: #28a745; color: white; border: none; padding: 10px 15px; cursor: pointer; width: 100%; border-radius: 4px; }
+        .result { margin-top: 20px; padding: 15px; background: #e9ecef; border-left: 5px solid #007bff; }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h2>Nhập thông tin bệnh nhân</h2>
+        <form action="/predict" method="post">
+            <div class="form-group">
+                <label>Tuổi:</label>
+                <input type="number" name="age" value="50" required>
+            </div>
+            
+            <div class="form-group">
+                <label>Huyết áp (Blood Pressure):</label>
+                <select name="blood_pressure">
+                    <option value="0">HIGH</option>
+                    <option value="1">LOW</option>
+                    <option value="2">NORMAL</option>
+                </select>
+            </div>
+
+            <div class="form-group">
+                <label>Cholesterol:</label>
+                <select name="cholesterol">
+                    <option value="0">HIGH</option>
+                    <option value="1">NORMAL</option>
+                </select>
+            </div>
+
+            <div class="form-group">
+                <label>Chỉ số Na_to_K:</label>
+                <input type="number" step="0.01" name="na_to_k" value="13.0" required>
+            </div>
+
+            <div class="form-group">
+                <label>Giới tính:</label>
+                <select name="sex">
+                    <option value="Female">Nữ (Female)</option>
+                    <option value="Male">Nam (Male)</option>
+                </select>
+            </div>
+
+            <button type="submit">Dự đoán kết quả</button>
+        </form>
+
+        {% if predictions %}
+        <div class="result">
+            <h3>Kết quả dự đoán:</h3>
+            <ul>
+                <li><strong>Decision Tree:</strong> {{ predictions.dtc }}</li>
+                <li><strong>Logistic Regression:</strong> {{ predictions.logistic }}</li>
+                <li><strong>KNN:</strong> {{ predictions.knn }}</li>
+                <li><strong>Naive Bayes:</strong> {{ predictions.bayes }}</li>
+            </ul>
+        </div>
+        {% endif %}
+    </div>
+</body>
+</html>

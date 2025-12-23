@@ -5,7 +5,7 @@ Bước 1: Vào new terminal gõ lệnh này mở .venv pip thư viện:
 .\.venv\Scripts\activate
 
 Bước 2: Pip thư viện theo dòng lệnh sau:
-pip install numpy pandas seaborn matplotlib scikit-learn
+pip install numpy pandas seaborn matplotlib scikit-learn flask
 
 Bước 3: Đóng .venv:
 deactivate
