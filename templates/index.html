@@ -5,12 +5,18 @@
     <title>Dự đoán loại thuốc</title>
     <style>
         body { font-family: Arial, sans-serif; margin: 40px; background-color: #f4f4f9; }
-        .container { max-width: 500px; background: white; padding: 20px; border-radius: 8px; box-shadow: 0 2px 10px rgba(0,0,0,0.1); }
+        .container { max-width: 500px; background: white; padding: 20px; border-radius: 8px; 
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1); }
         .form-group { margin-bottom: 15px; }
         label { display: block; margin-bottom: 5px; font-weight: bold; }
         select, input { width: 100%; padding: 8px; border: 1px solid #ddd; border-radius: 4px; }
         button { background: #28a745; color: white; border: none; padding: 10px 15px; cursor: pointer; width: 100%; border-radius: 4px; }
         .result { margin-top: 20px; padding: 15px; background: #e9ecef; border-left: 5px solid #007bff; }
+        .style-predictions {
+            display: flex:
+            flex-direction: column;
+            gap: 1rem;
+        }
     </style>
 </head>
 <body>
@@ -19,7 +25,7 @@
         <form action="/predict" method="post">
             <div class="form-group">
                 <label>Tuổi:</label>
-                <input type="number" name="age" value="50" required>
+                <input type="number" name="age" required>
             </div>
             
             <div class="form-group">
@@ -41,7 +47,7 @@
 
             <div class="form-group">
                 <label>Chỉ số Na_to_K:</label>
-                <input type="number" step="0.01" name="na_to_k" value="13.0" required>
+                <input type="number" step="0.01" name="na_to_k" required>
             </div>
 
             <div class="form-group">
@@ -58,7 +64,7 @@
         {% if predictions %}
         <div class="result">
             <h3>Kết quả dự đoán:</h3>
-            <ul>
+            <ul class="style-predictions">
                 <li><strong>Decision Tree:</strong> {{ predictions.dtc }}</li>
                 <li><strong>Logistic Regression:</strong> {{ predictions.logistic }}</li>
                 <li><strong>KNN:</strong> {{ predictions.knn }}</li>
